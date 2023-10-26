@@ -19,7 +19,8 @@ lambda_output_file=/opt/app/build/$1
 set -e
 
 yum update -y
-yum install -y cpio python2-pip yum-utils zip openssl
+#yum install -y cpio python2-pip yum-utils zip openssl
+yum install -y cpio python3 pip yum-utils zip openssl
 yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 pip install pipenv
 pipenv install
@@ -41,7 +42,8 @@ mkdir -p build
 chmod 755 *.py
 
 zip -r9 $lambda_output_file *.py bin
-VENV=$(pipenv --venv 2>&1)
+#VENV=$(pipenv --venv 2>&1)
+VENV=$(pipenv --venv 3>&1)
 LIB_PATH="$VENV/lib/*/site-packages"
 echo "Lib Path: $LIB_PATH"
 cd $LIB_PATH
